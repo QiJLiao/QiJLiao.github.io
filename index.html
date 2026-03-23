@@ -8,381 +8,265 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
-    /* ─── Color Tokens: Blue / Black / Purple only ─── */
     :root {
-      /* Core palette */
-      --dark:      #0d0f14;       /* near-black */
-      --dark-2:    #161920;       /* sidebar bg */
-      --dark-3:    #1e2230;       /* card dark */
-      --blue:      #4b8cf7;       /* primary accent */
-      --blue-d:    #2563c4;       /* deeper blue */
-      --blue-dim:  rgba(75,140,247,0.12);
-      --purple:    #7c5cbf;       /* secondary accent */
-      --purple-l:  #a78bfa;       /* light purple for highlights */
-      --purple-dim:rgba(124,92,191,0.12);
+      --dark:       #0d0f14;
+      --dark-2:     #161920;
+      --dark-3:     #1e2230;
+      --blue:       #4b8cf7;
+      --blue-d:     #2563c4;
+      --blue-dim:   rgba(75,140,247,0.1);
+      --purple:     #7c5cbf;
+      --purple-l:   #a78bfa;
+      --purple-dim: rgba(124,92,191,0.1);
 
-      /* Text */
-      --ink:       #0f1117;
-      --ink-2:     #374151;
-      --ink-3:     #6b7280;
-      --ink-4:     #9ca3af;
-      --ink-5:     #d1d5db;
+      --ink:    #0f1117;
+      --ink-2:  #374151;
+      --ink-3:  #6b7280;
+      --ink-4:  #9ca3af;
+      --ink-5:  #d1d5db;
 
-      /* Surfaces */
-      --bg:        #ffffff;
-      --bg-2:      #f8f9fc;
-      --bg-3:      #f0f2f7;
-      --border:    #e5e7eb;
-      --border-2:  #d1d5db;
+      --bg:      #ffffff;
+      --bg-2:    #f8f9fc;
+      --bg-3:    #f0f2f7;
+      --border:  #e5e7eb;
+      --border-2:#d1d5db;
 
       --sans:  'Inter', system-ui, sans-serif;
       --serif: 'Lora', Georgia, serif;
       --mono:  'JetBrains Mono', monospace;
-
-      --sidebar-w: 220px;
-      --topbar-h:  0px;        /* no top bar on desktop */
+      --sidebar-w: 210px;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: var(--sans);
-      font-size: 15px;
-      line-height: 1.7;
-      color: var(--ink);
-      background: var(--bg);
-      -webkit-font-smoothing: antialiased;
+      font-family: var(--sans); font-size: 15px; line-height: 1.7;
+      color: var(--ink); background: var(--bg); -webkit-font-smoothing: antialiased;
     }
     a { color: var(--blue); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    /* ════════════════════════════════════════
-       SIDEBAR
-    ════════════════════════════════════════ */
+    /* ── SIDEBAR ── */
     .sidebar {
-      position: fixed;
-      top: 0; left: 0; bottom: 0;
+      position: fixed; top: 0; left: 0; bottom: 0;
       width: var(--sidebar-w);
       background: var(--dark-2);
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
-      z-index: 100;
+      display: flex; flex-direction: column;
+      overflow-y: auto; z-index: 100;
       border-right: 1px solid rgba(255,255,255,0.05);
     }
     .sidebar::-webkit-scrollbar { width: 3px; }
-    .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); }
+    .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); }
 
-    /* Logo / Name block */
     .sb-logo {
-      padding: 28px 22px 22px;
+      padding: 26px 22px 20px;
       border-bottom: 1px solid rgba(255,255,255,0.06);
     }
-    .sb-name {
-      font-family: var(--sans);
-      font-size: 16px; font-weight: 700;
-      color: #fff; line-height: 1.2;
-      margin-bottom: 3px;
-    }
-    .sb-name-cn {
-      font-family: var(--mono);
-      font-size: 10.5px; color: rgba(255,255,255,0.3);
-      letter-spacing: 0.06em;
-    }
+    .sb-name { font-size: 15px; font-weight: 700; color: #fff; line-height: 1.25; margin-bottom: 3px; }
+    .sb-name-cn { font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,0.28); letter-spacing: 0.06em; }
 
-    /* Nav links */
-    .sb-nav {
-      flex: 1;
-      padding: 18px 0 24px;
-    }
+    .sb-nav { flex: 1; padding: 16px 0 20px; }
     .sb-section-label {
-      font-family: var(--mono);
-      font-size: 9.5px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: rgba(255,255,255,0.25);
-      padding: 16px 22px 6px;
+      font-family: var(--mono); font-size: 9.5px; text-transform: uppercase;
+      letter-spacing: 0.12em; color: rgba(255,255,255,0.22);
+      padding: 14px 22px 7px;
     }
     .sb-link {
-      display: flex;
-      align-items: center;
-      gap: 9px;
+      display: flex; align-items: center; gap: 10px;
       padding: 7px 22px;
-      font-size: 13px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.5);
-      transition: color 0.15s, background 0.15s;
-      cursor: pointer;
+      font-size: 13px; font-weight: 500;
+      color: rgba(255,255,255,0.45);
       border-left: 2px solid transparent;
+      transition: color 0.15s, background 0.15s, border-color 0.15s;
+      cursor: pointer;
     }
-    .sb-link:hover {
-      color: rgba(255,255,255,0.85);
-      background: rgba(255,255,255,0.04);
-      text-decoration: none;
+    .sb-link:hover { color: rgba(255,255,255,0.82); background: rgba(255,255,255,0.04); text-decoration: none; }
+    .sb-link.active { color: var(--blue); background: rgba(75,140,247,0.08); border-left-color: var(--blue); }
+    /* Single consistent nav dot */
+    .sb-link::before {
+      content: '·';
+      font-size: 20px; line-height: 0;
+      color: currentColor; opacity: 0.5;
+      flex-shrink: 0; width: 10px; text-align: center;
     }
-    .sb-link.active {
-      color: var(--blue);
-      background: rgba(75,140,247,0.1);
-      border-left-color: var(--blue);
-    }
-    .sb-icon { font-size: 13px; width: 16px; text-align: center; flex-shrink: 0; }
 
-    /* Social links at bottom */
     .sb-social {
-      padding: 16px 22px 28px;
+      padding: 14px 22px 26px;
       border-top: 1px solid rgba(255,255,255,0.06);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+      display: flex; flex-direction: column; gap: 8px;
     }
     .sb-social a {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: rgba(255,255,255,0.3);
+      font-family: var(--mono); font-size: 10.5px;
+      color: rgba(255,255,255,0.28);
       display: flex; align-items: center; gap: 6px;
       transition: color 0.15s;
     }
     .sb-social a:hover { color: var(--blue); text-decoration: none; }
 
-    /* ════════════════════════════════════════
-       MAIN CONTENT
-    ════════════════════════════════════════ */
-    .main {
-      margin-left: var(--sidebar-w);
-      min-height: 100vh;
-    }
+    /* ── MAIN ── */
+    .main { margin-left: var(--sidebar-w); min-height: 100vh; }
 
-    /* ── HERO (dark band at top) ── */
+    /* ── HERO ── */
     .hero {
-      background: var(--dark);
-      padding: 64px 60px 60px;
-      position: relative;
-      overflow: hidden;
+      background: var(--dark); padding: 64px 60px 58px;
+      position: relative; overflow: hidden;
     }
     .hero::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 1px;
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
       background: linear-gradient(90deg, transparent, var(--blue), var(--purple), transparent);
-      opacity: 0.4;
+      opacity: 0.35;
     }
-    /* subtle dot pattern */
     .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background-image: radial-gradient(rgba(75,140,247,0.07) 1px, transparent 1px);
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(75,140,247,0.06) 1px, transparent 1px);
       background-size: 28px 28px;
     }
-    .hero-inner {
-      display: flex; gap: 44px; align-items: flex-start;
-      position: relative; z-index: 1;
-      max-width: 760px;
-    }
+    .hero-inner { display: flex; gap: 44px; align-items: flex-start; position: relative; z-index: 1; max-width: 740px; }
     .avatar {
-      width: 120px; height: 120px; border-radius: 50%; flex-shrink: 0;
+      width: 114px; height: 114px; border-radius: 50%; flex-shrink: 0;
       background: var(--dark-3);
-      border: 2px solid rgba(75,140,247,0.3);
-      box-shadow: 0 0 0 5px rgba(75,140,247,0.07);
+      border: 2px solid rgba(75,140,247,0.28);
+      box-shadow: 0 0 0 5px rgba(75,140,247,0.06);
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
     }
-    .avatar-initials {
-      font-family: var(--mono); font-size: 30px; font-weight: 500; color: var(--blue); line-height: 1;
-    }
-    .avatar-hint { font-family: var(--mono); font-size: 8px; color: rgba(255,255,255,0.18); letter-spacing: 0.06em; }
+    .avatar-i { font-family: var(--mono); font-size: 28px; font-weight: 500; color: var(--blue); line-height: 1; }
+    .avatar-h { font-family: var(--mono); font-size: 8px; color: rgba(255,255,255,0.16); letter-spacing: 0.06em; }
 
     .hero-text { padding-top: 4px; }
-    .hero-tag {
-      font-family: var(--mono); font-size: 11px;
-      color: var(--blue); margin-bottom: 10px; letter-spacing: 0.04em;
-    }
-    .hero-name {
-      font-size: 42px; font-weight: 700; color: #fff;
-      line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 4px;
-    }
-    .hero-cn { font-family: var(--mono); font-size: 12.5px; color: rgba(255,255,255,0.3); margin-bottom: 14px; }
-    .hero-role { font-size: 15px; font-weight: 500; color: rgba(255,255,255,0.7); margin-bottom: 3px; }
-    .hero-affil { font-size: 13.5px; color: rgba(255,255,255,0.38); margin-bottom: 20px; }
+    .hero-tag { font-family: var(--mono); font-size: 11px; color: var(--blue); margin-bottom: 10px; letter-spacing: 0.04em; }
+    .hero-name { font-size: 40px; font-weight: 700; color: #fff; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 4px; }
+    .hero-cn { font-family: var(--mono); font-size: 12px; color: rgba(255,255,255,0.28); margin-bottom: 14px; }
+    .hero-role { font-size: 14.5px; font-weight: 500; color: rgba(255,255,255,0.68); margin-bottom: 3px; }
+    .hero-affil { font-size: 13px; color: rgba(255,255,255,0.35); margin-bottom: 20px; }
 
     .hero-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 22px; }
     .chip {
-      font-size: 12px; font-weight: 500;
-      padding: 3px 12px; border-radius: 20px;
-      border: 1px solid rgba(75,140,247,0.25);
-      color: rgba(75,140,247,0.85);
-      background: rgba(75,140,247,0.08);
+      font-size: 12px; font-weight: 500; padding: 3px 12px; border-radius: 20px;
+      border: 1px solid rgba(75,140,247,0.22); color: rgba(75,140,247,0.82);
+      background: rgba(75,140,247,0.07);
     }
-    .chip.p { border-color: rgba(167,139,250,0.25); color: rgba(167,139,250,0.85); background: rgba(167,139,250,0.08); }
-    .chip.n { border-color: rgba(255,255,255,0.1); color: rgba(255,255,255,0.4); background: transparent; }
+    .chip.p { border-color: rgba(167,139,250,0.22); color: rgba(167,139,250,0.82); background: rgba(167,139,250,0.07); }
+    .chip.n { border-color: rgba(255,255,255,0.08); color: rgba(255,255,255,0.35); background: transparent; }
 
     .hero-btns { display: flex; flex-wrap: wrap; gap: 9px; }
     .btn {
       display: inline-flex; align-items: center; gap: 6px;
-      font-size: 13px; font-weight: 600;
-      padding: 8px 18px; border-radius: 6px;
-      border: 1px solid transparent; transition: all 0.16s;
-      letter-spacing: 0.01em;
+      font-size: 13px; font-weight: 600; padding: 8px 18px;
+      border-radius: 6px; border: 1px solid transparent; transition: all 0.16s; letter-spacing: 0.01em;
     }
     .btn-blue { background: var(--blue); color: #fff; border-color: var(--blue); }
     .btn-blue:hover { background: #5b9bff; border-color: #5b9bff; color: #fff; text-decoration: none; }
-    .btn-ghost { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.6); border-color: rgba(255,255,255,0.1); }
-    .btn-ghost:hover { background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.2); text-decoration: none; }
+    .btn-ghost { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.55); border-color: rgba(255,255,255,0.1); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.18); text-decoration: none; }
 
-    /* ── CONTENT SECTIONS ── */
+    /* ── CONTENT ── */
     .content { padding: 0 60px; }
-    section { padding: 64px 0; border-bottom: 1px solid var(--border); scroll-margin-top: 24px; }
+    section { padding: 62px 0; border-bottom: 1px solid var(--border); scroll-margin-top: 24px; }
     section:last-child { border-bottom: none; }
 
-    .sec-head { display: flex; align-items: center; gap: 16px; margin-bottom: 36px; }
-    .sec-title {
-      font-size: 26px; font-weight: 700;
-      color: var(--ink); white-space: nowrap;
-      letter-spacing: -0.01em;
-    }
-    /* Blue underline accent on title */
-    .sec-title-accent {
-      display: inline-block;
-      border-bottom: 3px solid var(--blue);
-      padding-bottom: 2px;
-    }
+    .sec-head { display: flex; align-items: center; gap: 16px; margin-bottom: 34px; }
+    .sec-title { font-size: 24px; font-weight: 700; color: var(--ink); white-space: nowrap; letter-spacing: -0.01em; }
+    .sec-title-accent { display: inline-block; border-bottom: 3px solid var(--blue); padding-bottom: 2px; }
     .sec-line { flex: 1; height: 1px; background: var(--border); }
 
     /* ── ABOUT ── */
-    .bio {
-      font-family: var(--serif);
-      font-size: 17.5px; line-height: 1.9; color: var(--ink-2);
-      max-width: 700px;
-    }
+    .bio { font-family: var(--serif); font-size: 17px; line-height: 1.9; color: var(--ink-2); max-width: 700px; }
     .bio strong { color: var(--ink); font-weight: 600; }
-    .bio .hl { color: var(--blue-d); font-style: normal; font-weight: 500; }
+    .bio .hl  { color: var(--blue-d); font-style: normal; font-weight: 500; }
     .bio .hlp { color: var(--purple); font-style: normal; font-weight: 500; }
 
     /* ── NEWS ── */
-    .news-list { display: flex; flex-direction: column; max-width: 740px; }
+    .news-list { display: flex; flex-direction: column; max-width: 700px; }
     .news-row {
-      display: grid;
-      grid-template-columns: 80px 12px 1fr;
-      gap: 0 14px;
-      padding: 11px 0;
-      border-bottom: 1px solid var(--border);
-      align-items: flex-start;
+      display: grid; grid-template-columns: 80px 12px 1fr;
+      gap: 0 14px; padding: 11px 0; border-bottom: 1px solid var(--border); align-items: flex-start;
     }
     .news-row:last-child { border-bottom: none; }
     .news-date { font-family: var(--mono); font-size: 11px; color: var(--ink-4); text-align: right; padding-top: 3px; }
-    .news-dot-wrap { display: flex; flex-direction: column; align-items: center; padding-top: 6px; }
-    .ndot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .ndot-w { display: flex; flex-direction: column; align-items: center; padding-top: 6px; }
+    .ndot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
     .ndot.b  { background: var(--blue); }
     .ndot.p  { background: var(--purple-l); }
-    .ndot.dk { background: var(--ink-4); }
+    .ndot.dk { background: var(--ink-5); }
     .news-txt { font-size: 14px; color: var(--ink-2); line-height: 1.55; }
     .news-txt strong { color: var(--ink); }
 
     /* ── PUBLICATIONS ── */
-    .pub-list { display: flex; flex-direction: column; gap: 36px; }
-
-    .pub-entry {
-      display: grid;
-      grid-template-columns: 180px 1fr;
-      gap: 0 28px;
-      align-items: flex-start;
-    }
-    /* Thumbnail */
+    .pub-list { display: flex; flex-direction: column; gap: 38px; }
+    .pub-entry { display: grid; grid-template-columns: 174px 1fr; gap: 0 28px; align-items: flex-start; }
     .pub-thumb {
-      width: 180px; height: 120px;
-      border-radius: 6px;
-      border: 1px solid var(--border-2);
-      overflow: hidden;
-      flex-shrink: 0;
-      background: var(--bg-3);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 6px;
-      position: relative;
+      width: 174px; height: 116px; border-radius: 6px;
+      border: 1px solid var(--border-2); flex-shrink: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 5px; position: relative; overflow: hidden;
     }
-    /* Placeholder art per paper */
-    .pub-thumb.p1 { background: linear-gradient(135deg, #0d1b3e 0%, #1a2a5e 50%, #0d2240 100%); }
-    .pub-thumb.p2 { background: linear-gradient(135deg, #1a0d3e 0%, #2d1a5e 50%, #1a0d40 100%); }
-    .pub-thumb.p3 { background: linear-gradient(135deg, #0d1f38 0%, #0f3460 50%, #0d2240 100%); }
-    .thumb-abbr {
-      font-family: var(--mono); font-size: 18px; font-weight: 700;
-      letter-spacing: 0.05em;
-      z-index: 1;
-    }
-    .thumb-abbr.b { color: var(--blue); }
-    .thumb-abbr.p { color: var(--purple-l); }
-    .thumb-sub {
-      font-family: var(--mono); font-size: 8.5px; color: rgba(255,255,255,0.3);
-      letter-spacing: 0.08em; z-index: 1;
-    }
-    /* decorative circle */
+    .pub-thumb.p1 { background: linear-gradient(135deg, #0d1b3e, #1a2a5e 60%, #0d2240); }
+    .pub-thumb.p2 { background: linear-gradient(135deg, #1a0d3e, #2d1a5e 60%, #1a0d40); }
+    .pub-thumb.p3 { background: linear-gradient(135deg, #0d1f38, #0f3460 60%, #0a1e36); }
     .thumb-circle {
-      position: absolute;
-      width: 80px; height: 80px; border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.05);
+      position: absolute; width: 80px; height: 80px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.06);
       top: 50%; left: 50%; transform: translate(-50%,-50%);
     }
+    .thumb-abbr { font-family: var(--mono); font-size: 16px; font-weight: 700; letter-spacing: 0.05em; z-index: 1; }
+    .thumb-abbr.b { color: var(--blue); }
+    .thumb-abbr.p { color: var(--purple-l); }
+    .thumb-sub { font-family: var(--mono); font-size: 8px; color: rgba(255,255,255,0.28); letter-spacing: 0.08em; z-index: 1; }
 
-    .pub-body {}
-    .pub-title {
-      font-size: 15.5px; font-weight: 700;
-      color: var(--blue-d); line-height: 1.4; margin-bottom: 5px;
-    }
-    .pub-authors {
-      font-size: 13px; color: var(--ink-3); margin-bottom: 3px; line-height: 1.55;
-    }
+    .pub-title { font-size: 15px; font-weight: 700; color: var(--blue-d); line-height: 1.4; margin-bottom: 5px; }
+    .pub-authors { font-size: 13px; color: var(--ink-3); margin-bottom: 3px; line-height: 1.5; }
     .pub-authors strong { color: var(--ink-2); font-weight: 600; }
-    .pub-venue {
-      font-family: var(--serif); font-style: italic;
-      font-size: 13.5px; color: var(--ink-3); margin-bottom: 10px;
-    }
-    .pub-links {
-      display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px;
-    }
-    .plink {
-      font-size: 12.5px; font-weight: 500;
-      color: var(--blue); border-bottom: 1px solid rgba(75,140,247,0.3);
-      padding-bottom: 1px; transition: border-color 0.15s;
-    }
-    .plink:hover { border-color: var(--blue); text-decoration: none; }
-    .plink-sep { color: var(--ink-5); font-size: 12px; }
+    .pub-venue { font-family: var(--serif); font-style: italic; font-size: 13px; color: var(--ink-3); margin-bottom: 10px; }
+    .pub-links { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 11px; align-items: center; }
     .badge-sm {
       font-family: var(--mono); font-size: 9.5px; font-weight: 500;
-      letter-spacing: 0.07em; text-transform: uppercase;
-      padding: 2px 8px; border-radius: 3px;
+      letter-spacing: 0.07em; text-transform: uppercase; padding: 2px 8px; border-radius: 3px;
     }
     .b-review   { background: #eff6ff; color: #1d4ed8; border: 1px solid #bdd7f5; }
     .b-revision { background: #f5f3ff; color: var(--purple); border: 1px solid #ddd6fe; }
+    .plink { font-size: 12.5px; font-weight: 500; color: var(--blue); border-bottom: 1px solid rgba(75,140,247,0.3); padding-bottom: 1px; }
+    .plink:hover { border-color: var(--blue); text-decoration: none; }
+    .plink-sep { color: var(--ink-5); font-size: 12px; }
     .pub-abstract {
       font-size: 13.5px; color: var(--ink-3); line-height: 1.7;
-      border-left: 2px solid var(--border-2);
-      padding-left: 12px;
+      border-left: 2px solid var(--border-2); padding-left: 12px;
     }
 
-    /* ── RESEARCH ── */
+    /* ── RESEARCH PROJECTS ── */
+    /* Deliberately different from publications: engineering-focused layout */
     .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
     .proj-card {
-      border: 1px solid var(--border);
-      border-radius: 8px; background: var(--bg);
-      overflow: hidden;
-      transition: box-shadow 0.2s, border-color 0.2s;
+      border: 1px solid var(--border); border-radius: 8px; background: var(--bg);
+      overflow: hidden; transition: box-shadow 0.2s, border-color 0.2s;
+      display: flex; flex-direction: column;
     }
-    .proj-card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.08); border-color: var(--blue); }
-    .proj-stripe { height: 4px; }
-    .proj-stripe.b { background: linear-gradient(90deg, var(--blue-d), var(--blue)); }
-    .proj-stripe.p { background: linear-gradient(90deg, var(--purple), var(--purple-l)); }
+    .proj-card:hover { box-shadow: 0 4px 22px rgba(0,0,0,0.08); border-color: rgba(75,140,247,0.35); }
+    .proj-stripe { height: 4px; flex-shrink: 0; }
+    .proj-stripe.b  { background: linear-gradient(90deg, var(--blue-d), var(--blue)); }
+    .proj-stripe.p  { background: linear-gradient(90deg, var(--purple), var(--purple-l)); }
     .proj-stripe.dp { background: linear-gradient(90deg, #2d1b69, var(--purple)); }
     .proj-stripe.db { background: linear-gradient(90deg, var(--dark-3), var(--blue-d)); }
-    .proj-inner { padding: 20px 22px 18px; }
-    .proj-abbr {
-      font-family: var(--mono); font-size: 12.5px; font-weight: 500;
-      letter-spacing: 0.06em; margin-bottom: 3px;
-    }
+    .proj-inner { padding: 20px 22px 18px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
+    .proj-abbr { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; }
     .proj-abbr.b { color: var(--blue); }
     .proj-abbr.p { color: var(--purple-l); }
-    .proj-name { font-size: 15px; font-weight: 700; color: var(--ink); line-height: 1.3; margin-bottom: 4px; }
-    .proj-period { font-family: var(--mono); font-size: 10px; color: var(--ink-4); margin-bottom: 10px; letter-spacing: 0.04em; }
-    .proj-desc { font-size: 13px; color: var(--ink-2); line-height: 1.65; margin-bottom: 12px; }
-    .ptags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .proj-name { font-size: 15px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+    .proj-period { font-family: var(--mono); font-size: 10px; color: var(--ink-4); letter-spacing: 0.03em; }
+    /* Engineering-style spec list */
+    .proj-specs {
+      margin-top: 4px; display: flex; flex-direction: column; gap: 5px; flex: 1;
+    }
+    .spec-row {
+      display: grid; grid-template-columns: 90px 1fr;
+      gap: 0 10px; align-items: baseline;
+    }
+    .spec-key {
+      font-family: var(--mono); font-size: 10px; font-weight: 500;
+      color: var(--ink-4); text-transform: uppercase; letter-spacing: 0.06em;
+      padding-top: 2px; flex-shrink: 0;
+    }
+    .spec-val { font-size: 13px; color: var(--ink-2); line-height: 1.55; }
+    .ptags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
     .ptag {
       font-family: var(--mono); font-size: 10px;
       padding: 2px 8px; border-radius: 3px;
@@ -390,28 +274,28 @@
     }
 
     /* ── EDUCATION ── */
-    .edu-list { max-width: 720px; }
+    .edu-list { max-width: 700px; }
     .edu-entry {
-      display: grid; grid-template-columns: 120px 1fr;
+      display: grid; grid-template-columns: 116px 1fr;
       gap: 0 32px; padding: 26px 0; border-bottom: 1px solid var(--border);
     }
     .edu-entry:last-child { border-bottom: none; }
     .edu-year { font-family: var(--mono); font-size: 11.5px; color: var(--ink-4); padding-top: 4px; line-height: 1.6; }
     .edu-degree { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
-    .edu-school { font-size: 14px; color: var(--blue-d); font-weight: 500; margin-bottom: 7px; }
+    .edu-school { font-size: 13.5px; color: var(--blue-d); font-weight: 500; margin-bottom: 7px; }
     .edu-info { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
-    .edu-gpa { font-family: var(--mono); font-size: 12px; color: var(--blue-d); font-weight: 500; }
+    .edu-gpa { font-family: var(--mono); font-size: 11.5px; color: var(--blue-d); font-weight: 500; }
     .edu-award {
       display: inline-block; margin: 4px 6px 0 0;
-      font-size: 11.5px; font-weight: 500;
+      font-size: 11px; font-weight: 500;
       background: #f5f3ff; color: var(--purple); border: 1px solid #ddd6fe;
       padding: 2px 9px; border-radius: 4px;
     }
 
     /* ── HONORS ── */
-    .honor-table { max-width: 720px; }
+    .honor-table { max-width: 700px; }
     .honor-row {
-      display: grid; grid-template-columns: 150px 1fr 48px;
+      display: grid; grid-template-columns: 158px 1fr 48px;
       gap: 0 16px; padding: 12px 0; border-bottom: 1px solid var(--border);
       align-items: baseline;
     }
@@ -420,21 +304,36 @@
     .h-level.nat  { color: var(--blue); }
     .h-level.prov { color: var(--purple); }
     .h-level.univ { color: var(--ink-3); }
-    .h-name { font-size: 13.5px; color: var(--ink-2); }
+    .h-name { font-size: 13.5px; color: var(--ink-2); line-height: 1.5; }
     .h-name em { font-size: 12px; color: var(--ink-4); font-style: italic; }
     .h-year { font-family: var(--mono); font-size: 11.5px; color: var(--ink-4); text-align: right; }
 
-    /* ── CONTACT ── */
-    .contact-bio {
-      font-family: var(--serif); font-size: 17px; line-height: 1.85;
-      color: var(--ink-2); max-width: 640px; margin-bottom: 28px;
+    /* ── EXPERIENCE ── */
+    .exp-list { display: flex; flex-direction: column; gap: 0; max-width: 820px; }
+    .exp-entry {
+      display: grid; grid-template-columns: 170px 1fr;
+      gap: 0 36px; padding: 28px 0; border-bottom: 1px solid var(--border);
     }
-    .contact-bio strong { color: var(--ink); }
-    .contact-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .exp-entry:last-child { border-bottom: none; }
+    .exp-left { padding-top: 3px; }
+    .exp-org { font-size: 14px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+    .exp-org-sub { font-size: 12px; color: var(--ink-4); margin-bottom: 6px; }
+    .exp-period { font-family: var(--mono); font-size: 11px; color: var(--blue-d); font-weight: 500; margin-bottom: 3px; }
+    .exp-loc { font-family: var(--mono); font-size: 10.5px; color: var(--ink-4); }
+    .exp-role { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+    .exp-dept { font-size: 13px; color: var(--ink-3); margin-bottom: 12px; }
+    .exp-bullets { padding-left: 18px; display: flex; flex-direction: column; gap: 7px; }
+    .exp-bullets li { font-size: 13.5px; color: var(--ink-2); line-height: 1.65; }
+
+    /* ── CONTACT ── */
+    .contact-intro {
+      font-family: var(--serif); font-size: 17px; line-height: 1.85;
+      color: var(--ink-2); max-width: 580px; margin-bottom: 28px;
+    }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 11px; }
     .ccard {
       display: flex; align-items: center; gap: 9px;
-      padding: 11px 20px; border-radius: 7px;
-      border: 1px solid var(--border-2);
+      padding: 11px 22px; border-radius: 7px; border: 1px solid var(--border-2);
       background: var(--bg-2); font-size: 13.5px; font-weight: 500;
       color: var(--ink-2); transition: all 0.15s;
     }
@@ -444,116 +343,86 @@
 
     /* ── FOOTER ── */
     footer {
-      background: var(--dark);
-      margin-left: 0; padding: 28px 60px;
+      background: var(--dark); padding: 26px 60px;
       border-top: 1px solid rgba(255,255,255,0.05);
     }
-    footer p { font-family: var(--mono); font-size: 11.5px; color: rgba(255,255,255,0.2); }
-    footer a { color: rgba(75,140,247,0.4); }
+    footer p { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.18); }
+    footer a { color: rgba(75,140,247,0.35); }
 
     /* ── MOBILE ── */
-    @media(max-width:780px) {
+    @media(max-width:760px){
       .sidebar { display: none; }
       .main { margin-left: 0; }
-      .hero, .content { padding-left: 24px; padding-right: 24px; }
+      .hero, .content { padding-left: 22px; padding-right: 22px; }
       .pub-entry { grid-template-columns: 1fr; }
-      .pub-thumb { width: 100%; height: 100px; }
+      .pub-thumb { width: 100%; height: 90px; }
       .proj-grid { grid-template-columns: 1fr; }
       .edu-entry { grid-template-columns: 1fr; gap: 4px; }
-      .honor-row { grid-template-columns: 1fr; gap: 2px; }
+      .honor-row { grid-template-columns: 1fr; gap: 3px; }
       .h-year { display: none; }
+      footer { padding: 22px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ════════ SIDEBAR ════════ -->
+<!-- ══ SIDEBAR ══ -->
 <aside class="sidebar">
   <div class="sb-logo">
     <div class="sb-name">Qijun Liao</div>
     <div class="sb-name-cn">廖麒钧 · Takuma</div>
   </div>
-
   <nav class="sb-nav">
     <div class="sb-section-label">Navigation</div>
-    <a class="sb-link active" href="#about">
-      <span class="sb-icon">◈</span> About
-    </a>
-    <a class="sb-link" href="#news">
-      <span class="sb-icon">◎</span> News
-    </a>
-    <a class="sb-link" href="#publications">
-      <span class="sb-icon">◇</span> Publications
-    </a>
-    <a class="sb-link" href="#research">
-      <span class="sb-icon">◆</span> Research
-    </a>
-    <a class="sb-link" href="#education">
-      <span class="sb-icon">○</span> Education
-    </a>
-    <a class="sb-link" href="#honors">
-      <span class="sb-icon">◉</span> Honors
-    </a>
-    <a class="sb-link" href="#contact">
-      <span class="sb-icon">✦</span> Contact
-    </a>
-
-    <div class="sb-section-label" style="margin-top:8px;">Research Topics</div>
-    <a class="sb-link" href="#research">
-      <span class="sb-icon" style="font-size:10px;">▸</span> Safe RL
-    </a>
-    <a class="sb-link" href="#research">
-      <span class="sb-icon" style="font-size:10px;">▸</span> Control Barrier Functions
-    </a>
-    <a class="sb-link" href="#research">
-      <span class="sb-icon" style="font-size:10px;">▸</span> Physics-Guided RL
-    </a>
-    <a class="sb-link" href="#research">
-      <span class="sb-icon" style="font-size:10px;">▸</span> Legged Robotics
-    </a>
+    <a class="sb-link active" href="#about">About</a>
+    <a class="sb-link" href="#news">News</a>
+    <a class="sb-link" href="#publications">Publications</a>
+    <a class="sb-link" href="#research">Research</a>
+    <a class="sb-link" href="#education">Education</a>
+    <a class="sb-link" href="#honors">Honors</a>
+    <a class="sb-link" href="#experience">Experience</a>
+    <a class="sb-link" href="#contact">Contact</a>
   </nav>
-
   <div class="sb-social">
     <a href="mailto:kidkid112358@163.com">✉ kidkid112358@163.com</a>
     <a href="https://arxiv.org/search/?searchtype=author&query=Qijun+Liao" target="_blank">📄 arXiv</a>
-    <a href="https://github.com/QJLiao" target="_blank">⌥ github.com/QJLiao</a>
+    <a href="https://github.com/QiJLiao" target="_blank">⌥ github.com/QiJLiao</a>
   </div>
 </aside>
 
-<!-- ════════ MAIN ════════ -->
+<!-- ══ MAIN ══ -->
 <div class="main">
 
   <!-- HERO -->
   <div class="hero">
     <div class="hero-inner">
       <div class="avatar">
-        <div class="avatar-initials">QL</div>
-        <div class="avatar-hint">photo soon</div>
+        <div class="avatar-i">QL</div>
+        <div class="avatar-h">photo soon</div>
       </div>
       <div class="hero-text">
-        <div class="hero-tag">// Graduate Researcher · PhD Applicant 2027 Fall</div>
+        <div class="hero-tag">// Graduate Researcher · USTB Beijing</div>
         <h1 class="hero-name">Qijun Liao</h1>
         <div class="hero-cn">廖麒钧 &nbsp;·&nbsp; Takuma</div>
         <div class="hero-role">M.E. in Vehicle Engineering &nbsp;·&nbsp; Advisor: Prof. Jue Yang</div>
-        <div class="hero-affil">University of Science and Technology Beijing &nbsp;·&nbsp; Targeting Hong Kong Universities</div>
+        <div class="hero-affil">University of Science and Technology Beijing</div>
         <div class="hero-chips">
           <span class="chip">Safe Reinforcement Learning</span>
           <span class="chip">Control Barrier Functions</span>
           <span class="chip p">Physics-Guided RL</span>
-          <span class="chip p">Legged Robotics</span>
+          <span class="chip p">Optimal Control</span>
           <span class="chip n">Isaac Lab · TruckSim · CARLA</span>
         </div>
         <div class="hero-btns">
           <a class="btn btn-blue" href="mailto:kidkid112358@163.com">✉ Email Me</a>
           <a class="btn btn-ghost" href="https://arxiv.org/search/?searchtype=author&query=Qijun+Liao" target="_blank">📄 arXiv</a>
-          <a class="btn btn-ghost" href="https://github.com/QJLiao" target="_blank">⌥ GitHub</a>
-          <span class="btn btn-ghost" style="opacity:.35;cursor:default;">↓ CV (soon)</span>
+          <a class="btn btn-ghost" href="https://github.com/QiJLiao" target="_blank">⌥ GitHub</a>
+          <span class="btn btn-ghost" style="opacity:.3;cursor:default;">↓ CV (soon)</span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- CONTENT -->
   <div class="content">
 
     <!-- ABOUT -->
@@ -563,18 +432,19 @@
         <div class="sec-line"></div>
       </div>
       <p class="bio">
-        I am a graduate researcher at <strong>USTB</strong>, working at the intersection of
-        <span class="hl">safe reinforcement learning</span>,
-        <span class="hl">control barrier functions</span>, and
-        <span class="hlp">legged robotics</span>.
-        My research builds mathematical safety guarantees directly into policy design —
-        through CBF-based probabilistic risk reformulation, physics-grounded reward shaping,
-        and geometry-aware action parameterization — and validates them on both
-        legged robot platforms and vehicle dynamics simulators.
-        I am <strong>self-taught in RL and robotics</strong> with a formal background in vehicle engineering,
-        and am actively applying for <strong>PhD positions (2027 Fall)</strong>
-        at universities in Hong Kong.
-        I am happy to connect with researchers sharing similar interests.
+        I am a graduate researcher at <strong>USTB</strong> (Beijing),
+        advised by Prof. Jue Yang in the School of Mechanical Engineering.
+        My research focuses on the theoretical and algorithmic foundations of
+        <span class="hl">safe reinforcement learning</span> and
+        <span class="hl">control barrier functions</span>,
+        with a particular interest in how
+        <span class="hlp">physics-based structure</span> can be incorporated into policy design
+        to improve both safety and sample efficiency.
+        Concretely, I have developed methods for
+        probabilistic safety constraints via CVaR-based CBF reformulation,
+        energy-grounded reward shaping with formal convergence guarantees,
+        and geometry-aware action parameterization that enforces hard actuator limits within the policy itself.
+        My work is validated on simulation platforms including MuJoCo, Isaac Lab, and TruckSim.
       </p>
     </section>
 
@@ -585,36 +455,79 @@
         <div class="sec-line"></div>
       </div>
       <div class="news-list">
+
         <div class="news-row">
           <div class="news-date">Mar 2026</div>
-          <div class="news-dot-wrap"><div class="ndot b"></div></div>
-          <div class="news-txt"><strong>H-EARS</strong> major revision submitted to <em>Neurocomputing</em>. Preprint: <a href="https://arxiv.org/abs/2603.11600" target="_blank">arXiv:2603.11600</a>.</div>
+          <div class="ndot-w"><div class="ndot b"></div></div>
+          <div class="news-txt"><strong>H-EARS</strong> major revision submitted to <em>Neurocomputing</em> after completing all reviewer-requested experiments (sensitivity analysis, ablations, TruckSim validation). Preprint: <a href="https://arxiv.org/abs/2603.11600" target="_blank">arXiv:2603.11600</a>.</div>
         </div>
+
+        <div class="news-row">
+          <div class="news-date">Mar 2026</div>
+          <div class="ndot-w"><div class="ndot b"></div></div>
+          <div class="news-txt"><strong>Wheel Load Estimation</strong> paper preprint released. <a href="https://arxiv.org/abs/2603.14242" target="_blank">arXiv:2603.14242</a>.</div>
+        </div>
+
         <div class="news-row">
           <div class="news-date">Jan 2026</div>
-          <div class="news-dot-wrap"><div class="ndot p"></div></div>
-          <div class="news-txt"><strong>R²CBF</strong> submitted to <em>Automatica</em>.</div>
+          <div class="ndot-w"><div class="ndot p"></div></div>
+          <div class="news-txt"><strong>R²CBF</strong> submitted to <em>Automatica</em>. Includes Bayesian online covariance adaptation and CVaR-based safety boundary reformulation for vehicle control under friction uncertainty.</div>
         </div>
+
+        <div class="news-row">
+          <div class="news-date">Nov 2025</div>
+          <div class="ndot-w"><div class="ndot dk"></div></div>
+          <div class="news-txt">Assigned new task at <strong>BAIC BJEV</strong>: leading integration of an LLM-based assistant into internal engineering office software, supporting chassis quality documentation workflows.</div>
+        </div>
+
         <div class="news-row">
           <div class="news-date">Oct 2025</div>
-          <div class="news-dot-wrap"><div class="ndot p"></div></div>
-          <div class="news-txt">Started <strong>DD-SRad</strong> — decoupled per-dimension action-rate constraint module for RL. Targeting IROS / NeurIPS.</div>
+          <div class="ndot-w"><div class="ndot p"></div></div>
+          <div class="news-txt">Started <strong>DD-SRad</strong>: a plug-and-play decoupled action-rate constraint module for RL. Breaks dimensional coupling in global-radius squashing methods. Targeting IROS / NeurIPS.</div>
         </div>
+
+        <div class="news-row">
+          <div class="news-date">Oct 2025</div>
+          <div class="ndot-w"><div class="ndot b"></div></div>
+          <div class="news-txt"><strong>H-EARS</strong> submitted to <em>Neurocomputing</em>; reviews received with revision request.</div>
+        </div>
+
         <div class="news-row">
           <div class="news-date">Sep 2025</div>
-          <div class="news-dot-wrap"><div class="ndot dk"></div></div>
-          <div class="news-txt">Joined <strong>BAIC BJEV</strong> as Supply Quality Engineer Intern, Chassis Engineering Department.</div>
+          <div class="ndot-w"><div class="ndot dk"></div></div>
+          <div class="news-txt">Joined <strong>BAIC BJEV</strong> (Beijing Electric Vehicle) as Supply Quality Engineer Intern in the Chassis Engineering Department.</div>
         </div>
+
+        <div class="news-row">
+          <div class="news-date">Sep 2025</div>
+          <div class="ndot-w"><div class="ndot p"></div></div>
+          <div class="news-txt">Started <strong>R²CBF</strong> project on response-aware risk-constrained control barrier functions for vehicle safety.</div>
+        </div>
+
         <div class="news-row">
           <div class="news-date">May 2025</div>
-          <div class="news-dot-wrap"><div class="ndot b"></div></div>
-          <div class="news-txt">Started <strong>H-EARS</strong> project on physics-guided reward shaping.</div>
+          <div class="ndot-w"><div class="ndot b"></div></div>
+          <div class="news-txt">Started <strong>H-EARS</strong>: physics-guided reward shaping via hybrid energy decomposition. Dual-layer framework with functional independence proof.</div>
         </div>
+
+        <div class="news-row">
+          <div class="news-date">Jan 2025</div>
+          <div class="ndot-w"><div class="ndot b"></div></div>
+          <div class="news-txt">Started <strong>Wheel Load Estimation</strong> project. Proved Pressure-Velocity Uniqueness Mapping Theorem under fluid-inertia dynamics; submitted to <em>Vehicle System Dynamics</em> in May 2025.</div>
+        </div>
+
         <div class="news-row">
           <div class="news-date">Sep 2024</div>
-          <div class="news-dot-wrap"><div class="ndot dk"></div></div>
-          <div class="news-txt">Started M.E. studies at USTB, advised by <strong>Prof. Jue Yang</strong>.</div>
+          <div class="ndot-w"><div class="ndot dk"></div></div>
+          <div class="news-txt">Began M.E. studies at <strong>USTB</strong>, School of Mechanical Engineering, advised by Prof. Jue Yang.</div>
         </div>
+
+        <div class="news-row">
+          <div class="news-date">Jul 2023</div>
+          <div class="ndot-w"><div class="ndot dk"></div></div>
+          <div class="news-txt">Joined <strong>SAIC-GM-Wuling (SGMW)</strong> as R&amp;D intern in the Prototype Testing Department, Liuzhou. Worked on DHT topology analysis and energy management strategies.</div>
+        </div>
+
       </div>
     </section>
 
@@ -626,7 +539,6 @@
       </div>
       <div class="pub-list">
 
-        <!-- Paper 1 -->
         <div class="pub-entry">
           <div class="pub-thumb p1">
             <div class="thumb-circle"></div>
@@ -637,16 +549,22 @@
             <div class="pub-title">Response-Aware Risk-Constrained Control Barrier Function With Application to Vehicles</div>
             <div class="pub-authors"><strong>Qijun Liao*</strong>, Jue Yang &nbsp;<span style="font-size:11px;color:var(--ink-4)">* Corresponding Author</span></div>
             <div class="pub-venue">Automatica, 2026</div>
-            <div class="pub-links">
-              <span class="badge-sm b-review">Under Review</span>
-            </div>
+            <div class="pub-links"><span class="badge-sm b-review">Under Review</span></div>
             <div class="pub-abstract">
-              We propose R²CBF, a distributionally robust Control Barrier Function framework that combines hybrid response-aware uncertainty modeling with CVaR tail-risk reformulation. Instead of conservative L∞ worst-case bounds, we enforce probabilistic safety over the tail distribution of the CBF derivative, driven by real-time body signals. Bayesian online covariance adaptation (Inverse Wishart conjugate prior) handles dynamic friction changes without real-time identification. Zero safety boundary violations across all extreme combined-condition scenarios, with per-step violation probability provably below risk level β.
+              We present R²CBF, a distributionally robust Control Barrier Function that integrates
+              hybrid response-aware uncertainty modeling with CVaR tail-risk reformulation.
+              Rather than relying on conservative L∞ worst-case bounds, safety is enforced over
+              the tail distribution of the CBF derivative, driven by measurable body signals that
+              map model-environment mismatch to response distribution variance.
+              Online covariance adaptation via Bayesian Inverse Wishart conjugate updates
+              enables continuous safety margin adjustment without real-time friction identification.
+              Experiments confirm zero safety boundary violations across all extreme combined-condition
+              scenarios, with per-step violation probability empirically matching the theoretical
+              bound of β<sub>risk</sub> = 0.05.
             </div>
           </div>
         </div>
 
-        <!-- Paper 2 -->
         <div class="pub-entry">
           <div class="pub-thumb p2">
             <div class="thumb-circle"></div>
@@ -659,16 +577,23 @@
             <div class="pub-venue">Neurocomputing, 2026</div>
             <div class="pub-links">
               <span class="badge-sm b-revision">Reviews Completed</span>
-              <span class="plink-sep">·</span>
+              <span class="plink-sep">/</span>
               <a class="plink" href="https://arxiv.org/abs/2603.11600" target="_blank">Paper</a>
             </div>
             <div class="pub-abstract">
-              H-EARS introduces a dual-layer physics-guided reward shaping framework that provably separates task and energy objectives via functional independence — avoiding gradient conflicts common in unified potential designs. We prove that energy-based potentials provide informationally richer guidance than sparse task rewards, with convergence acceleration proportional to energy gradient magnitude. The O(n) modeling complexity (vs. full analytical mechanics) makes the method directly extensible to legged systems. Validated across MuJoCo benchmarks (Ant-v5, Hopper-v5, Humanoid-v5, LunarLander-v3) and TruckSim vehicle simulation.
+              H-EARS introduces a dual-layer physics-guided reward shaping framework built on a
+              functional independence theorem: task and energy objectives are proved to be
+              independently optimizable without gradient interference, resolving a fundamental
+              conflict in prior unified potential designs. Energy-based potentials are shown to
+              provide informationally richer guidance than sparse task rewards, with convergence
+              acceleration factors proportional to energy gradient magnitude over task reward sparsity.
+              An O(n) selective dynamics capture strategy reduces modeling effort from expert-level
+              analytical mechanics to energy-based characterization. Validated on Ant-v5,
+              Hopper-v5, Humanoid-v5, LunarLander-v3, and TruckSim vehicle simulation.
             </div>
           </div>
         </div>
 
-        <!-- Paper 3 -->
         <div class="pub-entry">
           <div class="pub-thumb p3">
             <div class="thumb-circle"></div>
@@ -681,11 +606,19 @@
             <div class="pub-venue">Vehicle System Dynamics, 2026</div>
             <div class="pub-links">
               <span class="badge-sm b-review">Under Review</span>
-              <span class="plink-sep">·</span>
+              <span class="plink-sep">/</span>
               <a class="plink" href="https://arxiv.org/abs/2603.14242" target="_blank">Paper</a>
             </div>
             <div class="pub-abstract">
-              We propose a wheel dynamic load estimation method that requires only a single gas pressure sensor, eliminating the need for force transducers. A nonlinear dynamics model explicitly accounting for fluid inertia in gas-oil coupling is established, with thermodynamic state equations integrating polytropic gas processes and flow-dependent damping. The core theoretical contribution is the Pressure-Velocity Uniqueness Mapping Theorem, which proves bijectivity and differentiability of the mapping p → v → F_z under fluid-inertia-dominated dynamics — guaranteeing unique load reconstruction from pressure trajectories. Validated with bench tests (force RMSE &lt;4.2%) and TruckSim co-simulation on ISO-8608 Class C/D road profiles (wheel load RMSE &lt;5%).
+              We propose a single gas pressure sensor approach for wheel dynamic load reconstruction,
+              eliminating the need for force transducers. A nonlinear model explicitly accounts for
+              fluid inertia in gas-oil coupling, where fluid acceleration terms dominate hysteresis
+              at high-frequency excitation (3–8 Hz). The Pressure-Velocity Uniqueness Mapping Theorem
+              proves bijectivity and differentiability of p → v → F<sub>z</sub> under these dynamics,
+              guaranteeing unique load reconstruction from pressure trajectories alone.
+              Bench tests (3–8 Hz sinusoidal): force RMSE &lt;4.2%, velocity RMSE &lt;3.8%.
+              TruckSim co-simulation on ISO-8608 Class C/D roads: wheel load RMSE &lt;5%
+              across braking, cornering, and combined maneuvers.
             </div>
           </div>
         </div>
@@ -693,7 +626,7 @@
       </div>
     </section>
 
-    <!-- RESEARCH -->
+    <!-- RESEARCH PROJECTS -->
     <section id="research">
       <div class="sec-head">
         <h2 class="sec-title"><span class="sec-title-accent">Research Projects</span></h2>
@@ -706,15 +639,23 @@
           <div class="proj-inner">
             <div class="proj-abbr b">H-EARS</div>
             <div class="proj-name">Hybrid Energy-Aware Reward Shaping</div>
-            <div class="proj-period">MAY 2025 – OCT 2025 &nbsp;·&nbsp; Neurocomputing (Reviews Completed)</div>
-            <div class="proj-desc">
-              Physics-guided dual-layer reward shaping that provably separates task and energy objectives via functional independence. Eliminates gradient conflicts in unified potential designs. O(n) modeling complexity; validated on MuJoCo locomotion benchmarks and TruckSim vehicle simulation.
+            <div class="proj-period">May 2025 – Oct 2025 &nbsp;·&nbsp; Neurocomputing</div>
+            <div class="proj-specs">
+              <div class="spec-row">
+                <div class="spec-key">Goal</div>
+                <div class="spec-val">Plug-and-play reward shaping that accelerates RL training via mechanical energy structure, without environment-specific tuning.</div>
+              </div>
+              <div class="spec-row">
+                <div class="spec-key">Platform</div>
+                <div class="spec-val">MuJoCo (Ant, Hopper, Humanoid, LunarLander), TruckSim vehicle simulation</div>
+              </div>
+              <div class="spec-row">
+                <div class="spec-key">Key Result</div>
+                <div class="spec-val">Consistent improvement over SAC/TD3/PPO baselines; O(n) modeling cost vs. full analytical mechanics.</div>
+              </div>
             </div>
             <div class="ptags">
-              <span class="ptag">Physics-Guided RL</span>
-              <span class="ptag">Reward Shaping</span>
-              <span class="ptag">MuJoCo</span>
-              <span class="ptag">TruckSim</span>
+              <span class="ptag">PyTorch</span><span class="ptag">MuJoCo</span><span class="ptag">TruckSim</span><span class="ptag">SAC / TD3 / PPO</span>
             </div>
           </div>
         </div>
@@ -724,15 +665,23 @@
           <div class="proj-inner">
             <div class="proj-abbr p">R²CBF</div>
             <div class="proj-name">Response-Aware Risk-Constrained CBF</div>
-            <div class="proj-period">SEP 2025 – JAN 2026 &nbsp;·&nbsp; Automatica (Under Review)</div>
-            <div class="proj-desc">
-              Distributionally robust CBF with Bayesian online covariance adaptation. CVaR tail-risk reformulation replaces conservative worst-case bounds. Zero safety violations across all extreme combined-condition scenarios vs. divergence in deterministic CBF baselines.
+            <div class="proj-period">Sep 2025 – Jan 2026 &nbsp;·&nbsp; Automatica</div>
+            <div class="proj-specs">
+              <div class="spec-row">
+                <div class="spec-key">Goal</div>
+                <div class="spec-val">Safety-critical vehicle control under uncertain friction without real-time parameter identification.</div>
+              </div>
+              <div class="spec-row">
+                <div class="spec-key">Platform</div>
+                <div class="spec-val">TruckSim six-wheel mining truck, MATLAB/Simulink co-simulation</div>
+              </div>
+              <div class="spec-row">
+                <div class="spec-key">Key Result</div>
+                <div class="spec-val">Zero safety violations across all extreme combined-condition tests; deterministic CBF baselines diverge on the same scenarios.</div>
+              </div>
             </div>
             <div class="ptags">
-              <span class="ptag">CBF</span>
-              <span class="ptag">CVaR</span>
-              <span class="ptag">Bayesian Online Learning</span>
-              <span class="ptag">SOCP</span>
+              <span class="ptag">MATLAB/Simulink</span><span class="ptag">TruckSim</span><span class="ptag">SOCP</span><span class="ptag">CVaR</span>
             </div>
           </div>
         </div>
@@ -742,15 +691,23 @@
           <div class="proj-inner">
             <div class="proj-abbr p">DD-SRad</div>
             <div class="proj-name">Decoupled Dynamic Spherical Radial Squashing</div>
-            <div class="proj-period">OCT 2025 – PRESENT &nbsp;·&nbsp; In Preparation</div>
-            <div class="proj-desc">
-              Plug-and-play RL module enforcing per-dimension actuator slew-rate limits with probability 1, eliminating the dimensional coupling pathology of global-radius methods. Validated on Unitree A1 in Isaac Lab under heterogeneous joint actuator limits.
+            <div class="proj-period">Oct 2025 – Present &nbsp;·&nbsp; In Preparation</div>
+            <div class="proj-specs">
+              <div class="spec-row">
+                <div class="spec-key">Goal</div>
+                <div class="spec-val">Drop-in RL module that enforces per-joint actuator slew-rate limits without post-hoc clipping or hierarchical filtering.</div>
+              </div>
+              <div class="spec-row">
+                <div class="spec-key">Platform</div>
+                <div class="spec-val">Isaac Lab — Unitree A1 quadruped, heterogeneous joint actuator limits</div>
+              </div>
+              <div class="spec-row">
+                <div class="spec-key">Key Result</div>
+                <div class="spec-val">Hard constraint satisfaction with probability 1 for all dimensions simultaneously; compatible with SAC and TD3 off-policy pipelines.</div>
+              </div>
             </div>
             <div class="ptags">
-              <span class="ptag">Action Constraints</span>
-              <span class="ptag">Legged Robotics</span>
-              <span class="ptag">Isaac Lab</span>
-              <span class="ptag">SAC / TD3</span>
+              <span class="ptag">Isaac Lab</span><span class="ptag">PyTorch</span><span class="ptag">SAC</span><span class="ptag">TD3</span>
             </div>
           </div>
         </div>
@@ -760,14 +717,23 @@
           <div class="proj-inner">
             <div class="proj-abbr b">Suspension Est.</div>
             <div class="proj-name">Wheel Load Estimation via Gas Pressure</div>
-            <div class="proj-period">JAN 2025 – MAY 2025 &nbsp;·&nbsp; Vehicle System Dynamics (Under Review)</div>
-            <div class="proj-desc">
-              Single gas pressure sensor approach with Pressure-Velocity Uniqueness Mapping Theorem guaranteeing unique load reconstruction. Bench-test force RMSE &lt;4.2%; TruckSim co-simulation RMSE &lt;5% across ISO-8608 Class C/D road profiles.
+            <div class="proj-period">Jan 2025 – May 2025 &nbsp;·&nbsp; Vehicle System Dynamics</div>
+            <div class="proj-specs">
+              <div class="spec-row">
+                <div class="spec-key">Goal</div>
+                <div class="spec-val">Replace multi-sensor wheel load measurement with a single gas pressure sensor for cost-effective real-time estimation.</div>
+              </div>
+              <div class="spec-row">
+                <div class="spec-key">Platform</div>
+                <div class="spec-val">Hydro-pneumatic suspension bench test rig, TruckSim co-simulation (ISO-8608 Class C/D)</div>
+              </div>
+              <div class="spec-row">
+                <div class="spec-key">Key Result</div>
+                <div class="spec-val">Force RMSE &lt;4.2% on bench tests; wheel load RMSE &lt;5% in full-vehicle simulation across braking, cornering, and combined maneuvers.</div>
+              </div>
             </div>
             <div class="ptags">
-              <span class="ptag">State Estimation</span>
-              <span class="ptag">Vehicle Dynamics</span>
-              <span class="ptag">TruckSim</span>
+              <span class="ptag">MATLAB/Simulink</span><span class="ptag">TruckSim</span><span class="ptag">State Estimation</span>
             </div>
           </div>
         </div>
@@ -788,7 +754,7 @@
             <div class="edu-degree">M.E. in Vehicle Engineering</div>
             <div class="edu-school">University of Science and Technology Beijing (USTB)</div>
             <div class="edu-info">
-              <span class="edu-gpa">GPA 88.1 / 100</span> &nbsp;·&nbsp; Top 20% in Major<br/>
+              <span class="edu-gpa">GPA 88.1 / 100</span>&nbsp; · &nbsp;Top 20% in Major<br/>
               <span class="edu-award">Second-Class Graduate Scholarship (2025)</span>
               <span class="edu-award">Merit Graduate Student (2025)</span>
             </div>
@@ -800,7 +766,7 @@
             <div class="edu-degree">B.E. in Vehicle Engineering</div>
             <div class="edu-school">University of Science and Technology Beijing (USTB)</div>
             <div class="edu-info">
-              <span class="edu-gpa">GPA 87.1 / 100</span> &nbsp;·&nbsp; Top 20% &nbsp;·&nbsp; Admitted to M.E. without entrance exam<br/>
+              <span class="edu-gpa">GPA 87.1 / 100</span>&nbsp; · &nbsp;Top 20% &nbsp;·&nbsp; Admitted to M.E. without entrance exam<br/>
               <span class="edu-award">Merit Student (2022, 2023)</span>
               <span class="edu-award">Outstanding Graduates (2024)</span>
             </div>
@@ -818,17 +784,22 @@
       <div class="honor-table">
         <div class="honor-row">
           <div class="h-level nat">National · 3rd Prize</div>
-          <div class="h-name">14th National Zhou Peiyuan Mechanics Competition <em>(Highest in USTB History)</em></div>
+          <div class="h-name">14th National Zhou Peiyuan Mechanics Competition &nbsp;<em>(Highest award ever achieved by USTB in this competition)</em></div>
           <div class="h-year">2023</div>
         </div>
         <div class="honor-row">
           <div class="h-level nat">National · 2nd Prize</div>
-          <div class="h-name">18th National University Smart Car Competition (National Finals &amp; Northern Division)</div>
+          <div class="h-name">18th National University Smart Car Competition — National Finals</div>
+          <div class="h-year">2023</div>
+        </div>
+        <div class="honor-row">
+          <div class="h-level nat">Regional · 2nd Prize</div>
+          <div class="h-name">18th National University Smart Car Competition — Northern Division</div>
           <div class="h-year">2023</div>
         </div>
         <div class="honor-row">
           <div class="h-level prov">Provincial · 2nd Prize</div>
-          <div class="h-name">National University Physics Competition <em>(Rank 1st, School of Mechanical Engineering)</em></div>
+          <div class="h-name">National University Physics Competition &nbsp;<em>(Ranked 1st among all students in School of Mechanical Engineering)</em></div>
           <div class="h-year">2021</div>
         </div>
         <div class="honor-row">
@@ -839,37 +810,82 @@
       </div>
     </section>
 
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="sec-head">
+        <h2 class="sec-title"><span class="sec-title-accent">Experience</span></h2>
+        <div class="sec-line"></div>
+      </div>
+      <div class="exp-list">
+
+        <div class="exp-entry">
+          <div class="exp-left">
+            <div class="exp-org">BAIC BJEV</div>
+            <div class="exp-org-sub">Beijing Electric Vehicle</div>
+            <div class="exp-period">Sep 2025 — Present</div>
+            <div class="exp-loc">Beijing, China</div>
+          </div>
+          <div class="exp-right">
+            <div class="exp-role">Supply Quality Engineer Intern</div>
+            <div class="exp-dept">Chassis Engineering Department</div>
+            <ul class="exp-bullets">
+              <li>Responsible for quality assurance of critical chassis sub-systems including steering, braking, and suspension; analyzed manufacturing deviation impacts on vehicle handling performance and NVH characteristics.</li>
+              <li>Developed supplier audit protocols and tracked component deviation metrics across production batches, providing data-backed feedback to upstream suppliers.</li>
+              <li>Gained hands-on insight into sensor noise sources and mechanical friction nonlinearities in production-level chassis hardware — directly informing modeling assumptions in my research on CBF-based safety control.</li>
+              <li>Currently leading the integration of an LLM-based assistant into the department's internal engineering office platform. The system is designed to support chassis quality documentation workflows, including automated report drafting, defect pattern summarization, and specification retrieval — reducing manual overhead in day-to-day QA processes.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-entry">
+          <div class="exp-left">
+            <div class="exp-org">SAIC-GM-Wuling</div>
+            <div class="exp-org-sub">SGMW Automobile</div>
+            <div class="exp-period">Jul 2023 — Aug 2023</div>
+            <div class="exp-loc">Liuzhou, China</div>
+          </div>
+          <div class="exp-right">
+            <div class="exp-role">R&amp;D Intern</div>
+            <div class="exp-dept">Prototype Testing Department</div>
+            <ul class="exp-bullets">
+              <li>Analyzed DHT (Dedicated Hybrid Transmission) topology architectures and energy management control strategies; produced a 100+ page technical report on system architecture covering mode switching logic, power flow optimization, and thermal management integration.</li>
+              <li>Participated in prototype vehicle assembly and functional debugging, bridging theoretical powertrain design with manufacturing constraints and physical system behavior.</li>
+              <li>Developed practical familiarity with hybrid drivetrain test procedures, instrument calibration, and data acquisition pipelines used in pre-production validation.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <!-- CONTACT -->
     <section id="contact">
       <div class="sec-head">
         <h2 class="sec-title"><span class="sec-title-accent">Contact</span></h2>
         <div class="sec-line"></div>
       </div>
-      <p class="contact-bio">
-        I am actively seeking <strong>PhD positions for 2027 Fall</strong>, particularly at universities in Hong Kong.
-        I am happy to discuss potential collaborations or have a conversation about research.
-        Please feel free to reach out!
+      <p class="contact-intro">
+        Feel free to reach out via email or find my work on arXiv and GitHub.
       </p>
-      <div class="contact-grid">
+      <div class="contact-links">
         <a class="ccard primary" href="mailto:kidkid112358@163.com">✉ kidkid112358@163.com</a>
-        <a class="ccard" href="https://arxiv.org/search/?searchtype=author&query=Qijun+Liao" target="_blank">📄 arXiv Author Page</a>
-        <a class="ccard" href="https://github.com/QJLiao" target="_blank">⌥ github.com/QJLiao</a>
+        <a class="ccard" href="https://arxiv.org/search/?searchtype=author&query=Qijun+Liao" target="_blank">📄 arXiv</a>
+        <a class="ccard" href="https://github.com/QiJLiao" target="_blank">⌥ github.com/QiJLiao</a>
       </div>
     </section>
 
   </div><!-- /content -->
 
   <footer>
-    <p>© 2026 Qijun Liao &nbsp;·&nbsp; Last updated March 2026 &nbsp;·&nbsp; <a href="https://QJLiao.github.io">QJLiao.github.io</a></p>
+    <p>© 2026 Qijun Liao &nbsp;·&nbsp; Last updated March 2026 &nbsp;·&nbsp; <a href="https://QiJLiao.github.io">QiJLiao.github.io</a></p>
   </footer>
 
 </div><!-- /main -->
 
 <script>
-  // Sidebar active link tracking
   const links = document.querySelectorAll('.sb-link[href^="#"]');
-  const sections = ['about','news','publications','research','education','honors','contact']
-    .map(id => document.getElementById(id)).filter(Boolean);
+  const ids = ['about','news','publications','research','education','honors','experience','contact'];
+  const secs = ids.map(id => document.getElementById(id)).filter(Boolean);
 
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -879,18 +895,16 @@
         if (a) a.classList.add('active');
       }
     });
-  }, { rootMargin: '-20% 0px -60% 0px' });
+  }, { rootMargin: '-15% 0px -65% 0px' });
 
-  sections.forEach(s => io.observe(s));
+  secs.forEach(s => io.observe(s));
 
-  // Smooth scroll for sidebar links
   links.forEach(l => {
     l.addEventListener('click', e => {
       const href = l.getAttribute('href');
-      if (href && href.startsWith('#')) {
+      if (href?.startsWith('#')) {
         e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
   });
