@@ -170,6 +170,30 @@
     .sec-line { flex: 1; height: 1px; background: var(--border); }
 
     /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 40px;
+      align-items: start;
+    }
+    .about-media { display: flex; flex-direction: column; gap: 14px; }
+    .about-gif-wrap {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border-2);
+      background: var(--bg-3);
+      line-height: 0;
+    }
+    .about-gif {
+      width: 100%; height: auto;
+      display: block;
+      border-radius: 7px;
+    }
+    @media(max-width:900px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .about-media { flex-direction: row; flex-wrap: wrap; }
+      .about-gif-wrap { flex: 1; min-width: 200px; }
+    }
     .bio { font-family: var(--serif); font-size: 17px; line-height: 1.9; color: var(--ink-2); max-width: 700px; }
     .bio strong { color: var(--ink); font-weight: 600; }
     .bio .hl  { color: var(--blue-d); font-style: normal; font-weight: 500; }
@@ -432,21 +456,28 @@
         <h2 class="sec-title"><span class="sec-title-accent">About Me</span></h2>
         <div class="sec-line"></div>
       </div>
-      <p class="bio">
-        I am a master candidate at <strong>USTB</strong> (Beijing),
-        supervised by Prof. Jue Yang in the School of Mechanical Engineering.
-        My current research focuses on the theoretical and algorithmic foundations of
-        <span class="hl">deep reinforcement learning</span> and
-        <span class="hl">control barrier functions</span>,
-        with a particular interest in how
-        <span class="hlp">physics-based structure</span> can be incorporated into policy design
-        to improve both safety and sample efficiency.
-        Concretely, I have developed methods for
-        probabilistic safety constraints via CVaR-based CBF reformulation,
-        energy-grounded reward shaping with formal convergence guarantees,
-        and geometry-aware action parameterization that enforces hard actuator limits within the policy itself.
-        All works are validated on simulation platforms including MuJoCo, Isaac Lab, and TruckSim.
-      </p>
+      <div class="about-grid">
+        <p class="bio">
+          I am a master candidate at <strong>USTB</strong> (Beijing),
+          supervised by Prof. Jue Yang in the School of Mechanical Engineering.
+          My current research focuses on the theoretical and algorithmic foundations of
+          <span class="hl">deep reinforcement learning</span> and
+          <span class="hl">control barrier functions</span>,
+          with a particular interest in how
+          <span class="hlp">physics-based structure</span> can be incorporated into policy design
+          to improve both safety and sample efficiency.
+          Concretely, I have developed methods for
+          probabilistic safety constraints via CVaR-based CBF reformulation,
+          energy-grounded reward shaping with formal convergence guarantees,
+          and geometry-aware action parameterization that enforces hard actuator limits within the policy itself.
+          All works are validated on simulation platforms including MuJoCo, Isaac Lab, and TruckSim.
+        </p>
+        <div class="about-media">
+          <div class="about-gif-wrap">
+            <img src="path.gif" alt="Research Demo" class="about-gif"/>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- NEWS -->
