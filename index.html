@@ -489,7 +489,7 @@
       <div class="news-list">
 
         <div class="news-row">
-          <div class="news-date">Apr. 2026</div>
+          <div class="news-date">May. 2026</div>
           <div class="ndot-w"><div class="ndot b"></div></div>
           <div class="news-txt">Completed <strong>DD-SRad</strong>:Constraint-Enhanced Reinforcement Learning Based on Dynamic Decoupled Spherical Radial Squashing . Submitted to <em>NeurIPS 2026</em>.</div>
         </div>
@@ -578,6 +578,27 @@
       <div class="pub-list">
 
         <div class="pub-entry">
+          <div class="pub-thumb p2">
+            <div class="thumb-circle"></div>
+            <div class="thumb-abbr p">DD-SRad</div>
+            <div class="thumb-sub">NeurIPS 2026</div>
+          </div>
+          <div class="pub-body">
+            <div class="pub-title">Constraint-Enhanced Reinforcement Learning Based on Dynamic Decoupled Spherical Radial Squashing</div>
+            <div class="pub-authors"><strong>Qijun Liao</strong>, Jue Yang*</div>
+            <div class="pub-venue">NeurIPS, 2026</div>
+            <div class="pub-links">
+              <span class="badge-sm b-review">Submitted</span>
+              <span class="plink-sep">/</span>
+              <a class="plink" href="https://anonymous.4open.science/r/DD-SRad" target="_blank">Code</a>
+            </div>
+            <div class="pub-abstract">
+              We propose DD-SRad, a smooth analytic policy parameterization for reinforcement learning under heterogeneous actuator rate constraints. By computing position-adaptive radii independently for each action dimension, DD-SRad achieves exact ℓ∞ feasible-set coverage, probability-1 hard per-step constraint satisfaction, and exact policy-gradient backpropagation with zero runtime solver overhead. The method is validated on MuJoCo benchmarks and Isaac Lab humanoid simulations with Unitree H1/G1 robots.
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-entry">
           <div class="pub-thumb p1">
             <div class="thumb-circle"></div>
             <div class="thumb-abbr b">R²CBF</div>
@@ -609,7 +630,7 @@
             <div class="pub-authors"><strong>Qijun Liao</strong>, Jue Yang*, Yiting Kang, Xinxin Zhao, Yong Zhang, Mingan Zhao</div>
             <div class="pub-venue">Neurocomputing, 2026</div>
             <div class="pub-links">
-              <span class="badge-sm b-revision">Revised and Resubmitted</span>
+              <span class="badge-sm b-revision">Accept with Minor Revision</span>
               <span class="plink-sep">/</span>
               <a class="plink" href="https://arxiv.org/abs/2603.11600" target="_blank">Paper</a>
               <span class="plink-sep">/</span>
@@ -670,8 +691,8 @@
                 <div class="spec-val">Isaac Lab — Unitree H1 in rough terrain and Unitree G1 in flat terrain, heterogeneous joint actuator limits</div>
               </div>
               <div class="spec-row">
-                <div class="spec-key">Key Result</div>
-                <div class="spec-val">Hard constraint satisfaction with probability 1 for all dimensions simultaneously and considerable performance; compatible with SAC and TD3 based constraint-enhanced off-policy pipelines.</div>
+                <div class="spec-key">Contribution</div>
+                <div class="spec-val">Achieves exact ℓ∞ coverage of the time-varying feasible set through per-dimension adaptive radii, with probability-1 hard constraint satisfaction, exact policy-gradient backpropagation, and zero runtime solver overhead. On MuJoCo benchmarks, DD-SRad reaches the highest return at zero violation across SAC/TD3 settings, while Isaac Lab H1/G1 simulations validate deployment from official joint-rate specifications.</div>
               </div>
             </div>
             <div class="ptags">
@@ -696,7 +717,7 @@
                 <div class="spec-val">TruckSim six-wheel mining truck, MATLAB/Simulink co-simulation</div>
               </div>
               <div class="spec-row">
-                <div class="spec-key">Key Result</div>
+                <div class="spec-key">Contribution</div>
                 <div class="spec-val">Rather than relying on conservative L∞ worst-case bounds, safety is enforced over
               the tail distribution of the CBF derivative, driven by measurable body signals that
               map model-environment mismatch to response distribution variance.
@@ -729,7 +750,7 @@
                 <div class="spec-val">MuJoCo (Ant, Hopper, Humanoid, LunarLander), TruckSim vehicle simulation</div>
               </div>
               <div class="spec-row">
-                <div class="spec-key">Key Result</div>
+                <div class="spec-key">Contribution</div>
                 <div class="spec-val">Energy-based potentials are shown to provide informationally richer guidance than sparse task rewards, with convergence acceleration factors proportional to energy gradient magnitude over task reward sparsity. An O(n) selective dynamics capture strategy reduces modeling effort from expert-level analytical mechanics to energy-based characterization. Validated on Ant-v5, Hopper-v5, Humanoid-v5, LunarLander-v3, and TruckSim vehicle simulation.</div>
               </div>
             </div>
@@ -755,7 +776,7 @@
                 <div class="spec-val">Hydro-pneumatic suspension bench test rig, TruckSim co-simulation (ISO-8608 Class C/D)</div>
               </div>
               <div class="spec-row">
-                <div class="spec-key">Key Result</div>
+                <div class="spec-key">Contribution</div>
                 <div class="spec-val">A nonlinear model explicitly accounts for
               fluid inertia in gas-oil coupling, where fluid acceleration terms dominate hysteresis
               at high-frequency excitation (3–8 Hz). The Pressure-Velocity Uniqueness Mapping Theorem
@@ -908,10 +929,10 @@
             <div class="exp-role">Supply Quality Engineer Intern</div>
             <div class="exp-dept">Chassis Engineering Department</div>
             <ul class="exp-bullets">
+              <li>Lead the integration of an LLM-based assistant into the department's internal engineering office platform. The system is designed to support chassis quality documentation workflows, including automated report drafting, defect pattern summarization, and specification retrieval — reducing manual overhead in day-to-day QA processes.</li>
               <li>Responsible for quality assurance of critical chassis sub-systems including steering, braking, and suspension; analyzed manufacturing deviation impacts on vehicle handling performance and NVH characteristics.</li>
               <li>Developed supplier audit protocols and tracked component deviation metrics across production batches, providing data-backed feedback to upstream suppliers.</li>
               <li>Gained hands-on insight into sensor noise sources and mechanical friction nonlinearities in production-level chassis hardware — directly informing modeling assumptions in my research on CBF-based safety control.</li>
-              <li>Currently leading the integration of an LLM-based assistant into the department's internal engineering office platform. The system is designed to support chassis quality documentation workflows, including automated report drafting, defect pattern summarization, and specification retrieval — reducing manual overhead in day-to-day QA processes.</li>
             </ul>
           </div>
         </div>
